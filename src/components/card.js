@@ -21,7 +21,8 @@ const Card = (article) => {
   const card = document.createElement('div');
   const headline = document.createElement('div');
   const author = document.createElement('div');
-  const imgContainer = document.createElement('img');
+  const imgContainer = document.createElement('div');
+  const image = document.createElement('img');
   const byline = document.createElement('span');
 
   card.classList.add('card');
@@ -29,21 +30,22 @@ const Card = (article) => {
   author.classList.add('author');
   imgContainer.classList.add('img-container');
 
-  headline.textContent = headline;
-  imgContainer.src = authorPhoto;
-  byline.textContent = `By: ${authorName}`;
+  headline.textContent = article.headline;
+  imgContainer.src = article.authorPhoto;
+  byline.textContent = `By ${article.authorName}`;
 
   card.appendChild(headline);
-  headline.appendChild(author);
+  card.appendChild(author);
   author.appendChild(imgContainer);
-  imgContainer.appendChild(byline);
+  author.appendChild(byline);
+  imgContainer.appendChild(image);
 
   card.addEventListener('click', (evt) => {
-    card.classList.toggle('selected');
-  })
+    console.log(`${article['headline']}`);
+  });
 
   return card;
-}
+};
 
 const cardAppender = (selector) => {
   // TASK 6
