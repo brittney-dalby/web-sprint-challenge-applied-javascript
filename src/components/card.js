@@ -31,7 +31,7 @@ const Card = (article) => {
   imgContainer.classList.add('img-container');
 
   headline.textContent = article.headline;
-  imgContainer.src = article.authorPhoto;
+  image.src = article.authorPhoto;
   byline.textContent = `By ${article.authorName}`;
 
   card.appendChild(headline);
@@ -56,8 +56,17 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-
+axios.get('http://localhost:5000/api/articles')
+.then((res) => {
+  const keys = Object.values(res.data.articles);
+  keys.forEach((array) => {
+    array.forEach((item) => {
+      const card = Card(item);
+      document.querySelector(selector).appendChild(card);
+    });
+  });
+});
    
-}
+};
 
 export { Card, cardAppender }
